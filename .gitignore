@@ -5,6 +5,7 @@ imgs/
 Thesis/
 model/
 code/
+pytorch/
 
 # 忽略jupyter notebook检查点
 .ipynb_checkpoints/
@@ -19,6 +20,9 @@ code/
 *.joblib
 *.env
 *.pt
+*.pdf
+*.zip
+
 
 # 环境相关
 .env
