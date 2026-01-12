@@ -1,6 +1,7 @@
 import numpy as np
 import scipy as sp
-import scipy.stats
+import scipy.stats as stats
+from scipy.special import logsumexp
 import matplotlib.pyplot as plt
 
 
@@ -24,12 +25,12 @@ class GaussianMixture1D:
     def logpdf(self, samples):
         mixture_logpdfs = np.zeros([len(samples), self.num_mixtures])
         for mixture_idx in range(self.num_mixtures):
-            mixture_logpdfs[:, mixture_idx] = scipy.stats.norm.logpdf(
+            mixture_logpdfs[:, mixture_idx] =stats.norm.logpdf(
                 samples,
                 loc=self.means[mixture_idx],
                 scale=self.stds[mixture_idx]
             )
-        return sp.misc.logsumexp(mixture_logpdfs + np.log(self.mixture_probs), axis=1)
+        return logsumexp(mixture_logpdfs + np.log(self.mixture_probs), axis=1)
 
     def pdf(self, samples):
         return np.exp(self.logpdf(samples))
